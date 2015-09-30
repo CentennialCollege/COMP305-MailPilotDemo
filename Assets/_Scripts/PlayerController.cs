@@ -21,10 +21,11 @@ public class PlayerController : MonoBehaviour {
 
 	private void _CheckInput() {
 		this._newPosition = gameObject.GetComponent<Transform> ().position; // current position
-		
+
 		if (Input.GetAxis ("Horizontal") > 0) {
 			this._newPosition.x += this.speed; // add move value to current position
 		}
+	
 		
 		if (Input.GetAxis ("Horizontal") < 0) {
 			this._newPosition.x -= this.speed; // subtract move value to current position
