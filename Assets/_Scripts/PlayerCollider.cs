@@ -14,7 +14,7 @@ public class PlayerCollider : MonoBehaviour {
 
 	// PRIVATE INSTANCE VARIABLES
 	private AudioSource[] _audioSources; // an array of AudioSources
-	private AudioSource _cloudAudioSource, _islandAudioSource;
+	private AudioSource _cloudAudioSource, _islandAudioSource, _endAudioSource;
 
 
 	// Use this for initialization
@@ -22,6 +22,7 @@ public class PlayerCollider : MonoBehaviour {
 		this._audioSources = this.GetComponents<AudioSource> ();
 		this._cloudAudioSource = this._audioSources [1];
 		this._islandAudioSource = this._audioSources [2];
+		this._endAudioSource = this._audioSources [3];
 
 		this._SetScore ();
 		this.gameOverLabel.enabled = false;
@@ -55,6 +56,7 @@ public class PlayerCollider : MonoBehaviour {
 	}
 
 	private void _EndGame() {
+		this._endAudioSource.Play ();
 		Destroy(gameObject);
 		this.scoreLabel.enabled = false;
 		this.livesLabel.enabled = false;
