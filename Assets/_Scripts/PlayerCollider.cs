@@ -7,8 +7,6 @@ public class PlayerCollider : MonoBehaviour {
 	//PUBLIC INSTANCE VARIABLES
 	public Text scoreLabel;
 	public Text livesLabel;
-	public Text gameOverLabel;
-	public Text finalScoreLabel;
 	public int  scoreValue = 0;
 	public int  livesValue = 5;
 
@@ -25,8 +23,6 @@ public class PlayerCollider : MonoBehaviour {
 		this._endAudioSource = this._audioSources [3];
 
 		this._SetScore ();
-		this.gameOverLabel.enabled = false;
-		this.finalScoreLabel.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -56,13 +52,7 @@ public class PlayerCollider : MonoBehaviour {
 	}
 
 	private void _EndGame() {
-		this._endAudioSource.Play ();
-		Destroy(gameObject);
-		this.scoreLabel.enabled = false;
-		this.livesLabel.enabled = false;
-		this.gameOverLabel.enabled = true;
-		this.finalScoreLabel.enabled = true;
-		this.finalScoreLabel.text = "Score: " + this.scoreValue;
+		Application.LoadLevel ("GameOver");
 	}
 	
 }
