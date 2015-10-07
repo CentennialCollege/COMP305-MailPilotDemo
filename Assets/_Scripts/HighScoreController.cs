@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HighScoreScript : MonoBehaviour {
+public class HighScoreController : MonoBehaviour {
+	public int finalScore;
+
 	void Awake() {
 		DontDestroyOnLoad (this);
 	}
@@ -14,6 +16,5 @@ public class HighScoreScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 }

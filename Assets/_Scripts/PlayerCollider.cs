@@ -12,7 +12,9 @@ public class PlayerCollider : MonoBehaviour {
 
 	// PRIVATE INSTANCE VARIABLES
 	private AudioSource[] _audioSources; // an array of AudioSources
-	private AudioSource _cloudAudioSource, _islandAudioSource, _endAudioSource;
+	private AudioSource _cloudAudioSource, _islandAudioSource, _endAudioSource, _livesAudioSource;
+
+	private HighScoreController _highScoreController;
 
 
 	// Use this for initialization
@@ -21,6 +23,9 @@ public class PlayerCollider : MonoBehaviour {
 		this._cloudAudioSource = this._audioSources [1];
 		this._islandAudioSource = this._audioSources [2];
 		this._endAudioSource = this._audioSources [3];
+		this._livesAudioSource = this._audioSources [4];
+
+		this._highScoreController = GameObject.FindWithTag ("HighScoreController").GetComponent ("HighScoreController") as HighScoreController;
 
 		this._SetScore ();
 	}
@@ -34,6 +39,10 @@ public class PlayerCollider : MonoBehaviour {
 		if (otherGameObject.tag == "Island") {
 			this._islandAudioSource.Play (); // play yay sound
 			this.scoreValue += 100; // add 100 points
+			if((this.scoreValue % 1000) == 0) {
+				this._livesAudioSource.Play();
+				this.livesValue++;
+			}
 		}
 		if (otherGameObject.tag == "Cloud") {
 			this._cloudAudioSource.Play (); // play thunder sound
@@ -52,6 +61,7 @@ public class PlayerCollider : MonoBehaviour {
 	}
 
 	private void _EndGame() {
+		this._highScoreController.finalScore = this.scoreValue; // passing scoreValue to finalScore
 		Application.LoadLevel ("GameOver");
 	}
 	
